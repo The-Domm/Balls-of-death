@@ -1,0 +1,72 @@
+[gd_scene format=3 uid="uid://dp61w0jrr681p"]
+
+[ext_resource type="Script" uid="uid://unddkf5vkchq" path="res://enemy.gd" id="1_qi2p4"]
+[ext_resource type="Texture2D" uid="uid://b1fawdt1301ba" path="res://assets/sprites/enemy.png" id="2_qi2p4"]
+[ext_resource type="Texture2D" uid="uid://bhw1v30hyicjd" path="res://assets/sprites/END.png" id="3_qi2p4"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iifgy"]
+atlas = ExtResource("2_qi2p4")
+region = Rect2(0, 0, 223, 261)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_epg4t"]
+atlas = ExtResource("2_qi2p4")
+region = Rect2(223, 0, 223, 261)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xkjhv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iifgy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_epg4t")
+}],
+"loop": 1,
+"name": &"all",
+"speed": 6.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_njrnu"]
+size = Vector2(126, 127)
+
+[node name="enemy" type="CharacterBody2D" unique_id=486559485]
+collision_mask = 32769
+script = ExtResource("1_qi2p4")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1698530827]
+position = Vector2(-1, -1)
+scale = Vector2(1.128, 1)
+sprite_frames = SubResource("SpriteFrames_xkjhv")
+animation = &"all"
+autoplay = "all"
+frame_progress = 0.7135211
+
+[node name="RayCastRight" type="RayCast2D" parent="." unique_id=1328590337]
+scale = Vector2(12.583333, 11.166667)
+target_position = Vector2(5.4834437, 0)
+
+[node name="RayCastLeft" type="RayCast2D" parent="." unique_id=1855661817]
+scale = Vector2(12.583333, 11.166667)
+target_position = Vector2(-5.801325, -0.08955224)
+
+[node name="RayCastTop" type="RayCast2D" parent="." unique_id=2054016050]
+position = Vector2(0, -0.9999962)
+scale = Vector2(12.583333, 11.166667)
+target_position = Vector2(0.0794702, -6.358209)
+
+[node name="RayCastDown" type="RayCast2D" parent="." unique_id=1464092322]
+position = Vector2(-2, -3.9999962)
+scale = Vector2(12.583333, 11.166667)
+target_position = Vector2(0.1589404, 6.2686563)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2045586284]
+position = Vector2(0, -3.5)
+scale = Vector2(2, 2)
+shape = SubResource("RectangleShape2D_njrnu")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2125498858]
+visible = false
+z_index = 200
+position = Vector2(127.111084, 71.5)
+scale = Vector2(1.1324074, 1.1324074)
+texture = ExtResource("3_qi2p4")

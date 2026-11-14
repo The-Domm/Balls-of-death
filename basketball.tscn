@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://dv1867kbs8sih"]
+
+[ext_resource type="Script" uid="uid://dl2bpkf6edivq" path="res://basketball.gd" id="1_impb6"]
+[ext_resource type="Texture2D" uid="uid://in44p6wfmhbm" path="res://assets/sprites/myBalls.png" id="2_hvw6b"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_i012i"]
+radius = 37.01351
+
+[node name="basketball" type="CharacterBody2D" unique_id=180087076]
+collision_layer = 32768
+script = ExtResource("1_impb6")
+BOUNCINESS = null
+THROWABLE = null
+bounce_count = null
+
+[node name="basketball_sprite" type="Sprite2D" parent="." unique_id=983138486]
+texture = ExtResource("2_hvw6b")
+
+[node name="basketball_collision" type="CollisionShape2D" parent="." unique_id=303880067]
+shape = SubResource("CircleShape2D_i012i")

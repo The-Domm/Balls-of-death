@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://bg76aqwiu12w2"]
+
+[ext_resource type="Texture2D" uid="uid://cagfcclkjhj4j" path="res://feherkor.png" id="1_kgu82"]
+
+[node name="Particle" type="Area2D" unique_id=1936471772]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1007999668]
+position = Vector2(-1.009742e-28, 0)
+scale = Vector2(0.078125, 0.078125)
+texture = ExtResource("1_kgu82")

@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dv1867kbs8sih"]
 
 [ext_resource type="Script" uid="uid://dl2bpkf6edivq" path="res://basketball.gd" id="1_impb6"]
-[ext_resource type="Texture2D" uid="uid://in44p6wfmhbm" path="res://assets/sprites/myBalls.png" id="2_hvw6b"]
+[ext_resource type="Texture2D" uid="uid://in44p6wfmhbm" path="res://assets/sprites/basketBall.png" id="2_hvw6b"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_i012i"]
 radius = 37.01351

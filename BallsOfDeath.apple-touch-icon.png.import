@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://in44p6wfmhbm"
-path="res://.godot/imported/myBalls.png-c924b1a427646fcaf4a1883440305702.ctex"
+uid="uid://b8dstm0kkfwog"
+path="res://.godot/imported/BallsOfDeath.apple-touch-icon.png-4cd0cbe0759bfa827f836611f0a1093b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/myBalls.png"
-dest_files=["res://.godot/imported/myBalls.png-c924b1a427646fcaf4a1883440305702.ctex"]
+source_file="res://BallsOfDeath.apple-touch-icon.png"
+dest_files=["res://.godot/imported/BallsOfDeath.apple-touch-icon.png-4cd0cbe0759bfa827f836611f0a1093b.ctex"]
 
 [params]
 

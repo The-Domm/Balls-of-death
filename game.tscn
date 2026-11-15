@@ -80,7 +80,7 @@ stream = ExtResource("4_7jktm")
 parameters/looping = true
 
 [node name="enemy" parent="." unique_id=486559485 instance=ExtResource("6_ryrav")]
-position = Vector2(2128, -1225)
+position = Vector2(2959, -1666)
 
 [node name="enemy2" parent="." unique_id=1202946171 instance=ExtResource("6_ryrav")]
 position = Vector2(-1750, -577)

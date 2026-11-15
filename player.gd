@@ -3,7 +3,7 @@ extends CharacterBody2D
 const SPEED = 1000
 const JUMP_VELOCITY = -1200.0
 var pressed = false
-const my_balls:PackedScene = preload("res://basketball.tscn")
+const basket_balls:PackedScene = preload("res://basketball.tscn")
 @onready var jatekos: AnimatedSprite2D = $Jatekos
 @onready var kez: AnimatedSprite2D = $Kez
 @onready var kezhitbox: CollisionShape2D = $Kezhitbox
@@ -36,7 +36,7 @@ func _physics_process(delta: float) -> void:
 			pressed = false
 			delete_particles()
 			var force = calcForce()
-			var ball = my_balls.instantiate()
+			var ball = basket_balls.instantiate()
 			get_tree().current_scene.add_child(ball)
 			thrown = true
 			ball._throw(position + Vector2(dir*36, -50), force.force, force.angle)

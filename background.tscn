@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://b6sgw5t8d31ph"]
+
+[ext_resource type="Texture2D" uid="uid://b6bscqg1dclnq" path="res://assets/sprites/cliffs.png" id="1_i7s6n"]
+[ext_resource type="Texture2D" uid="uid://chebje8qqxxtp" path="res://assets/sprites/clouds.png" id="2_xehqc"]
+
+[node name="Background" type="Node2D" unique_id=113815056]
+z_index = -100
+
+[node name="Mountain" type="Parallax2D" parent="." unique_id=1585652719]
+z_index = -100
+scroll_scale = Vector2(0.2, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Mountain" unique_id=313959850]
+position = Vector2(539, 326)
+scale = Vector2(2, 2)
+texture = ExtResource("1_i7s6n")
+
+[node name="Clouds" type="Parallax2D" parent="." unique_id=1818272566]
+z_index = -101
+scroll_scale = Vector2(0.1, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Clouds" unique_id=960201680]
+position = Vector2(538, 326)
+scale = Vector2(2, 2)
+texture = ExtResource("2_xehqc")
+
+[node name="Parallax2D" type="Parallax2D" parent="." unique_id=2054001239]
+scroll_scale = Vector2(0, 0)
+
+[node name="ColorRect" type="ColorRect" parent="Parallax2D" unique_id=979596151]
+z_index = -104
+offset_left = -4304.0
+offset_top = -2519.0
+offset_right = 5468.0
+offset_bottom = 2944.0
+color = Color(0.015686275, 0.101960786, 0.2509804, 1)

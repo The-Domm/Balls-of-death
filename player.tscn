@@ -217,6 +217,7 @@ scale = Vector2(7.765625, 7.359375)
 texture = SubResource("GradientTexture2D_i012i")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=510610544]
+visible = false
 z_index = -200
 z_as_relative = false
 position = Vector2(-108, -13.000008)

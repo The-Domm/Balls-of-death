@@ -75,7 +75,7 @@ func _physics_process(delta: float) -> void:
 		if (posDif).length() < 1000:
 			var ball = my_balls.instantiate()
 			get_tree().current_scene.add_child(ball)
-			ball._throw(position + Vector2(0, -100), randf_range(0.1, 0.5), posDif.angle(), self)
+			ball._throw(position + Vector2(0, -100), velocity, randf_range(0.1, 0.5), posDif.angle(), self)
 			thrown = true
 
 	velocity = direction*SPEED

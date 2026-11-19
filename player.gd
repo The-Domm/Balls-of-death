@@ -39,7 +39,7 @@ func _physics_process(delta: float) -> void:
 			var ball = basket_balls.instantiate()
 			get_tree().current_scene.add_child(ball)
 			thrown = true
-			ball._throw(position + Vector2(dir*36, -50), force.force, force.angle)
+			ball._throw(position + Vector2(dir*36, -50), velocity, force.force, force.angle)
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
@@ -92,15 +92,14 @@ func show_trow(angle, force, pos: Vector2):
 	delete_particles()
 
 	var nextPos = pos
-	var vel : Vector2=Vector2(throw_force*force, 0).rotated(angle)
-	for i in range(1,60):
+	var vel : Vector2=Vector2(throw_force*force, 0).rotated(angle)+velocity
+	for i in range(1,10):
 		var particles = PARTICLE.instantiate()
-		vel+=get_gravity()*0.016
-		nextPos += vel*1/60
-		if (i%6 == 0):
-			get_tree().current_scene.add_child(particles)
-			particles.global_position = nextPos
-			particle_instances.append(particles)
+		nextPos.y=pos.y+vel.y*i*0.1+0.5*get_gravity().y*i*i*0.01
+		nextPos.x=pos.x+vel.x*i*0.1
+		get_tree().current_scene.add_child(particles)
+		particles.global_position = nextPos
+		particle_instances.append(particles)
 
 func _process(delta: float) -> void:
 	if(position.y<-6500):

@@ -32,7 +32,7 @@ func _physics_process(delta: float) -> void:
 		velocity=(velocity*BOUNCINESS).bounce(collision.get_normal())
 		bounce_var+=1
 	rotation+=PI/1000*velocity.length()
-	if (bounce_var> bounce_count || position.y > 100):
+	if (bounce_var> bounce_count || position.y > 300):
 		if (fireball_owner != null):
 			fireball_owner.thrown = false
 		else:
@@ -41,9 +41,9 @@ func _physics_process(delta: float) -> void:
 		
 	
 	
-func _throw(pos:Vector2, strenght: float, angle:float, fireball = null)->void:
+func _throw(pos:Vector2, starting_vel:Vector2, strenght: float, angle:float, fireball = null)->void:
 	position=pos
-	velocity=(Vector2(THROWABLE,0)*strenght).rotated(angle)
+	velocity=(Vector2(THROWABLE,0)*strenght).rotated(angle)+starting_vel
 	if fireball:
 		basketball_sprite.texture = fireballtexture
 		fireball_owner = fireball

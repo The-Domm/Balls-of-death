@@ -12,6 +12,7 @@ var throw_force:int
 var startPos = 0
 var thrown: bool = false
 var dimming=0
+var no_boss:bool = true
 func _ready() -> void:
 	throw_force= get_parent().get_node("basketball").THROWABLE
 	#bossEvent()
@@ -39,7 +40,7 @@ func _physics_process(delta: float) -> void:
 			var ball = basket_balls.instantiate()
 			get_tree().current_scene.add_child(ball)
 			thrown = true
-			ball._throw(position + Vector2(dir*36, -50), velocity, force.force, force.angle)
+			ball._throw(self, force.force, force.angle,Vector2(dir*36, -50))
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
@@ -102,7 +103,8 @@ func show_trow(angle, force, pos: Vector2):
 		particle_instances.append(particles)
 
 func _process(delta: float) -> void:
-	if(position.y<-6500):
+	if(position.y<-6500 && no_boss):
+		no_boss=false
 		velocity=Vector2(0,100)
 		position=Vector2(-1119.0,-24447.0)
 	jatekos.offset=Vector2i(0,0)

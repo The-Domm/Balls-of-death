@@ -41,12 +41,13 @@ func _physics_process(delta: float) -> void:
 		
 	
 	
-func _throw(pos:Vector2, starting_vel:Vector2, strenght: float, angle:float, fireball = null)->void:
-	position=pos
-	velocity=(Vector2(THROWABLE,0)*strenght).rotated(angle)+starting_vel
-	if fireball:
+func _throw(origin:CharacterBody2D, strenght: float, angle:float,offset:Vector2=Vector2.ZERO)->void:
+	position=origin.position+offset
+	velocity=(Vector2(THROWABLE,0)*strenght).rotated(angle)+origin.velocity
+	if origin is Enemy:
 		basketball_sprite.texture = fireballtexture
-		fireball_owner = fireball
-		collision_mask = 1<<7 | 1
+		fireball_owner = origin
 		print(collision_mask)
+	collision_mask = ~origin.collision_layer
+	collision_layer = ~ origin.collision_mask
 		

@@ -8,20 +8,20 @@ z_index = -100
 
 [node name="Mountain" type="Parallax2D" parent="." unique_id=1585652719]
 z_index = -100
-scroll_scale = Vector2(0.2, 0)
+scroll_scale = Vector2(0.2, 0.2)
 
 [node name="Sprite2D" type="Sprite2D" parent="Mountain" unique_id=313959850]
-position = Vector2(539, 326)
-scale = Vector2(2, 2)
+position = Vector2(539, -100)
+scale = Vector2(3, 3)
 texture = ExtResource("1_i7s6n")
 
 [node name="Clouds" type="Parallax2D" parent="." unique_id=1818272566]
 z_index = -101
-scroll_scale = Vector2(0.1, 0)
+scroll_scale = Vector2(0.1, 0.1)
 
 [node name="Sprite2D" type="Sprite2D" parent="Clouds" unique_id=960201680]
-position = Vector2(538, 326)
-scale = Vector2(2, 2)
+position = Vector2(538, -300)
+scale = Vector2(3, 3)
 texture = ExtResource("2_xehqc")
 
 [node name="Parallax2D" type="Parallax2D" parent="." unique_id=2054001239]

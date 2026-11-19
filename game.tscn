@@ -59,9 +59,6 @@ zoom = Vector2(0.31, 0.31)
 visible = false
 position = Vector2(144, -14)
 collision_mask = 2
-BOUNCINESS = 1.1
-THROWABLE = 2000
-bounce_count = 1
 
 [node name="TileMap" type="TileMap" parent="." unique_id=1896411683]
 position = Vector2(-35, -361)
@@ -100,3 +97,5 @@ position = Vector2(271, -24625)
 health = 3
 
 [node name="Background" parent="." unique_id=113815056 instance=ExtResource("7_eow3j")]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=862705318]

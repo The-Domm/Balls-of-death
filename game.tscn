@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://opkq874nxwnv"]
 
 [ext_resource type="Script" uid="uid://cu7fc78jkfyec" path="res://game.gd" id="1_7jktm"]
-[ext_resource type="PackedScene" uid="uid://dv1867kbs8sih" path="res://basketball.tscn" id="2_fc0e3"]
 [ext_resource type="PackedScene" uid="uid://br27rrvphdtwi" path="res://player.tscn" id="2_feb5d"]
 [ext_resource type="AudioStream" uid="uid://g7ajnumhbg7b" path="res://assets/sounds/Cursed Night.mp3" id="4_7jktm"]
 [ext_resource type="Texture2D" uid="uid://dbxcgd4o8u7ww" path="res://assets/sprites/log_tiles.png" id="4_fc0e3"]
@@ -53,12 +52,7 @@ script = ExtResource("1_7jktm")
 position = Vector2(4, -7000)
 
 [node name="Camera2D" type="Camera2D" parent="player" unique_id=911228454]
-zoom = Vector2(0.31, 0.31)
-
-[node name="basketball" parent="." unique_id=180087076 instance=ExtResource("2_fc0e3")]
-visible = false
-position = Vector2(144, -14)
-collision_mask = 2
+zoom = Vector2(0.38, 0.38)
 
 [node name="TileMap" type="TileMap" parent="." unique_id=1896411683]
 position = Vector2(-35, -361)
@@ -99,3 +93,7 @@ health = 3
 [node name="Background" parent="." unique_id=113815056 instance=ExtResource("7_eow3j")]
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=862705318]
+
+[node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=1363095873]
+visible = false
+color = Color(0, 0, 0, 1)

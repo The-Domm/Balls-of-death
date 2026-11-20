@@ -190,9 +190,8 @@ script = ExtResource("1_onrkg")
 position = Vector2(-27.000006, -96)
 scale = Vector2(0.8944684, 0.89446867)
 sprite_frames = SubResource("SpriteFrames_xkjhv")
-animation = &"jump"
+animation = &"run"
 autoplay = "idle"
-frame_progress = 0.69369715
 
 [node name="Jatekoshitbox" type="CollisionShape2D" parent="." unique_id=848505298]
 position = Vector2(-24, -104)

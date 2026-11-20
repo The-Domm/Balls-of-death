@@ -1,11 +1,13 @@
+class_name BasketBall
 extends CharacterBody2D
 
 @export var BOUNCINESS:float =1.1
-@export var THROWABLE:int=2000
+const THROWABLE:int=2000
 var bounce_var:int=0
-var fireball_owner: Node2D = null
+@export var ball_owner: Node2D = null
 @export var bounce_count:int = 1
 func _ready() -> void:
+	assert(ball_owner != null, "Error: 'target' must be assigned before add_child()!")
 	pass
 var prevpos : Vector2=Vector2.ZERO
 
@@ -20,34 +22,26 @@ func _physics_process(delta: float) -> void:
 	var collision = move_and_collide(velocity*delta)
 	if collision:
 		var obj = collision.get_collider()
-		if fireball_owner != null and obj.name == "player":
-			get_tree().reload_current_scene()
-		if "health" in obj and obj != fireball_owner:
+		if "health" in obj:
 			obj.health-=1
-			if (fireball_owner != null):
-				fireball_owner.thrown = false
-			else:
-				get_parent().get_node("player").thrown = false
+			ball_owner.thrown = false
 			queue_free()
 		velocity=(velocity*BOUNCINESS).bounce(collision.get_normal())
 		bounce_var+=1
 	rotation+=PI/1000*velocity.length()
 	if (bounce_var> bounce_count || position.y > 300):
-		if (fireball_owner != null):
-			fireball_owner.thrown = false
-		else:
-			get_parent().get_node("player").thrown = false
+		if(ball_owner != null):
+			ball_owner.thrown = false
 		free()
 		
 	
 	
-func _throw(origin:CharacterBody2D, strenght: float, angle:float,offset:Vector2=Vector2.ZERO)->void:
-	position=origin.position+offset
-	velocity=(Vector2(THROWABLE,0)*strenght).rotated(angle)+origin.velocity
-	if origin is Enemy:
+func _throw(strenght: float, angle:float,offset:Vector2=Vector2.ZERO)->void:
+	position=ball_owner.position+offset
+	velocity=(Vector2(THROWABLE,0)*strenght).rotated(angle)+ball_owner.velocity
+	if ball_owner is Enemy:
 		basketball_sprite.texture = fireballtexture
-		fireball_owner = origin
 		print(collision_mask)
-	collision_mask = ~origin.collision_layer
-	collision_layer = ~ origin.collision_mask
+	collision_mask = ~ball_owner.collision_layer
+	collision_layer = ~ ball_owner.collision_mask
 		

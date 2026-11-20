@@ -1,10 +1,22 @@
 extends CharacterBody2D
-
+const SPRITE_HEIGHT = 294
 const SPEED = 1000
-const JUMP_VELOCITY = -1200.0
+const JUMP_VELOCITY = -1680.0
+@export var jump_height_ratio: float = 2.0
+@export var time_to_apex: float = 0.7
+@export var fall_multiplier: float = 2.2
+@export var jump_cut_multiplier: float = 0.5
+
+@onready var jatekos: AnimatedSprite2D = $Jatekos
+
+@onready var player_height: float = SPRITE_HEIGHT * abs(jatekos.scale.y)
+@onready var jump_height: float = player_height * jump_height_ratio
+@onready var gravity_f: float = (2.0 * jump_height) / (time_to_apex * time_to_apex)
+@onready var jump_velocity: float = -(2.0 * jump_height) / time_to_apex
 var pressed = false
 const basket_balls:PackedScene = preload("res://basketball.tscn")
-@onready var jatekos: AnimatedSprite2D = $Jatekos
+@export var health:int=1
+
 @onready var kez: AnimatedSprite2D = $Kez
 @onready var kezhitbox: CollisionShape2D = $Kezhitbox
 @onready var feny: PointLight2D = $Feny
@@ -14,11 +26,15 @@ var thrown: bool = false
 var dimming=0
 var no_boss:bool = true
 func _ready() -> void:
-	throw_force= get_parent().get_node("basketball").THROWABLE
+	
+	throw_force= BasketBall.THROWABLE
 	#bossEvent()
 	position=Vector2.ZERO
-	
-var direction := Input.get_axis("move_left", "move_right")
+	ProjectSettings.set_setting("physics/2d/default_gravity", gravity_f)
+	var space := get_world_2d().space
+	PhysicsServer2D.area_set_param(space, PhysicsServer2D.AREA_PARAM_GRAVITY, gravity_f)
+	print(get_gravity())
+var direction : float
 func _physics_process(delta: float) -> void:
 	direction = Input.get_axis("move_left", "move_right")
 	if !thrown:
@@ -38,16 +54,21 @@ func _physics_process(delta: float) -> void:
 			delete_particles()
 			var force = calcForce()
 			var ball = basket_balls.instantiate()
+			ball.ball_owner=self
 			get_tree().current_scene.add_child(ball)
 			thrown = true
-			ball._throw(self, force.force, force.angle,Vector2(dir*36, -50))
+			ball._throw(force.force, force.angle,Vector2(dir*36, -50))
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
+		print(get_gravity())
 
 	# Handle jump.
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
+	if Input.is_action_just_released("jump" ) and velocity.y < 0:
+		velocity.y*=0.3
+		
 	
 	if direction == -1:
 		jatekos.flip_h = true
@@ -67,7 +88,7 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 	if(position.y>1000):
-		get_tree().quit()
+		get_tree().reload_current_scene()
 
 
 func calcForce():
@@ -103,8 +124,10 @@ func show_trow(angle, force, pos: Vector2):
 		particle_instances.append(particles)
 
 func _process(delta: float) -> void:
+	if(health<1):
+		get_tree().reload_current_scene()
 	if(position.y<-6500 && no_boss):
-		no_boss=false
+		bossEvent()
 		velocity=Vector2(0,100)
 		position=Vector2(-1119.0,-24447.0)
 	jatekos.offset=Vector2i(0,0)
@@ -126,6 +149,7 @@ func _process(delta: float) -> void:
 			jatekos.play("run")
 			
 func bossEvent()->void:
+	no_boss=false
 	feny.visible=true
 	get_parent().get_node("CanvasModulate").visible=true
 	dimming=0.01

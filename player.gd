@@ -25,6 +25,9 @@ var startPos = 0
 var thrown: bool = false
 var dimming=0
 var no_boss:bool = true
+
+var start_time := -1
+
 func _ready() -> void:
 	
 	throw_force= BasketBall.THROWABLE
@@ -60,11 +63,14 @@ func _physics_process(delta: float) -> void:
 			ball._throw(force.force, force.angle,Vector2(dir*36, -50))
 	# Add the gravity.
 	if not is_on_floor():
+		if (start_time == -1): start_time = Time.get_ticks_msec()
 		velocity += get_gravity() * delta
 		print(get_gravity())
+	else:
+		start_time = -1
 
 	# Handle jump.
-	if Input.is_action_just_pressed("jump") and is_on_floor():
+	if Input.is_action_just_pressed("jump") and (is_on_floor() or Time.get_ticks_msec() - start_time <= 200):
 		velocity.y = JUMP_VELOCITY
 	if Input.is_action_just_released("jump" ) and velocity.y < 0:
 		velocity.y*=0.3
@@ -93,6 +99,7 @@ func _physics_process(delta: float) -> void:
 
 func calcForce():
 	var relPos :Vector2 = get_local_mouse_position() - startPos
+	print(get_local_mouse_position())
 	var size = get_viewport_rect().size 
 	var relSize = 1920/size.x
 	var force = relSize * relPos.length()
@@ -114,7 +121,7 @@ func show_trow(angle, force, pos: Vector2):
 	delete_particles()
 
 	var nextPos = pos
-	var vel : Vector2=Vector2(throw_force*force, 0).rotated(angle)+velocity
+	var vel : Vector2=Vector2(throw_force*force, 0).rotated(angle)
 	for i in range(1,10):
 		var particles = PARTICLE.instantiate()
 		nextPos.y=pos.y+vel.y*i*0.1+0.5*get_gravity().y*i*i*0.01

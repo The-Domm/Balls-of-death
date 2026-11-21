@@ -8,10 +8,8 @@ radius = 37.01351
 
 [node name="basketball" type="CharacterBody2D" unique_id=180087076]
 collision_layer = 32768
+collision_mask = 3
 script = ExtResource("1_impb6")
-BOUNCINESS = null
-THROWABLE = null
-bounce_count = null
 
 [node name="basketball_sprite" type="Sprite2D" parent="." unique_id=983138486]
 texture = ExtResource("2_hvw6b")

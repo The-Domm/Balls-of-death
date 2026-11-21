@@ -1,4 +1,5 @@
 extends CharacterBody2D
+class_name Enemy
 
 const SPEED = 100
 @export var health = 1
@@ -74,8 +75,9 @@ func _physics_process(delta: float) -> void:
 		var posDif = get_parent().get_node("player").position - position
 		if (posDif).length() < 1000:
 			var ball = my_balls.instantiate()
+			ball.ball_owner=self
 			get_tree().current_scene.add_child(ball)
-			ball._throw(position + Vector2(0, -100), randf_range(0.1, 0.5), posDif.angle(), self)
+			ball._throw(randf_range(0.1, 0.5), posDif.angle())
 			thrown = true
 
 	velocity = direction*SPEED

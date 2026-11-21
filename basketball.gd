@@ -36,7 +36,7 @@ func _physics_process(delta: float) -> void:
 	
 func _throw(strenght: float, angle:float,offset:Vector2=Vector2.ZERO)->void:
 	position=ball_var.ball_owner.position+offset
-	velocity=(Vector2(ball_var.max_force,0)*strenght).rotated(angle)+ball_var.ball_owner.velocity
+	velocity=(Vector2(ball_var.max_force,0)*strenght).rotated(angle)
 	if ball_var.ball_owner is Enemy:
 		print(collision_mask)
 	collision_mask = ~ball_var.ball_owner.collision_layer

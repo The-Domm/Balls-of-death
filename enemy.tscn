@@ -43,26 +43,7 @@ animation = &"all"
 autoplay = "all"
 frame_progress = 0.7135211
 
-[node name="RayCastRight" type="RayCast2D" parent="." unique_id=1328590337]
-scale = Vector2(12.583333, 11.166667)
-target_position = Vector2(5.4834437, 0)
-
-[node name="RayCastLeft" type="RayCast2D" parent="." unique_id=1855661817]
-scale = Vector2(12.583333, 11.166667)
-target_position = Vector2(-5.801325, -0.08955224)
-
-[node name="RayCastTop" type="RayCast2D" parent="." unique_id=2054016050]
-position = Vector2(0, -0.9999962)
-scale = Vector2(12.583333, 11.166667)
-target_position = Vector2(0.0794702, -6.358209)
-
-[node name="RayCastDown" type="RayCast2D" parent="." unique_id=1464092322]
-position = Vector2(-2, -3.9999962)
-scale = Vector2(12.583333, 11.166667)
-target_position = Vector2(0.1589404, 6.2686563)
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2045586284]
-position = Vector2(0, -3.5)
 scale = Vector2(2, 2)
 shape = SubResource("CapsuleShape2D_ryrav")
 

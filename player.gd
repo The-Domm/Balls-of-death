@@ -41,7 +41,7 @@ func _ready() -> void:
 	ProjectSettings.set_setting("physics/2d/default_gravity", gravity_f)
 	var space := get_world_2d().space
 	PhysicsServer2D.area_set_param(space, PhysicsServer2D.AREA_PARAM_GRAVITY, gravity_f)
-	print(get_gravity())
+	#print(get_gravity())
 var direction : float
 func _physics_process(delta: float) -> void:
 	direction = Input.get_axis("move_left", "move_right")
@@ -70,7 +70,7 @@ func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		if (start_time == -1): start_time = Time.get_ticks_msec()
 		velocity += get_gravity() * delta
-		print(get_gravity())
+		#print(get_gravity())
 	else:
 		start_time = -1
 

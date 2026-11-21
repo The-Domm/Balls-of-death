@@ -28,7 +28,6 @@ const basketball_texture: Texture2D = preload("res://assets/sprites/basketBall.p
 @onready var kezhitbox: CollisionShape2D = $Kezhitbox
 @onready var feny: PointLight2D = $Feny
 var startPos = 0
-var thrown: bool = false
 var dimming=0
 var no_boss:bool = true
 
@@ -45,7 +44,7 @@ func _ready() -> void:
 var direction : float
 func _physics_process(delta: float) -> void:
 	direction = Input.get_axis("move_left", "move_right")
-	if !thrown:
+	if thrown<max_thrown:
 		var dir:float
 		if Input.is_mouse_button_pressed(1):
 			if !pressed:
@@ -64,7 +63,7 @@ func _physics_process(delta: float) -> void:
 			var ball = basket_balls.instantiate()
 			ball.setup(ball_var)
 			get_tree().current_scene.add_child(ball)
-			thrown = true
+			thrown += 1
 			ball._throw(force.force, force.angle,Vector2(dir*36, -50))
 	# Add the gravity.
 	if not is_on_floor():
@@ -149,7 +148,7 @@ func _process(delta: float) -> void:
 		else:
 			kez.play("jump")
 	else:
-		if thrown:
+		if thrown>=max_thrown:
 			kez.play("empty")
 		else:
 			kez.play("idle")

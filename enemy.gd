@@ -6,7 +6,6 @@ const SPEED = 100
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 @onready var bounds := Rect2(position-Vector2(500,500),Vector2(1000,1000))
 @onready var half_size := Vector2(collision_shape_2d.shape.radius, collision_shape_2d.shape.height / 2.0)*collision_shape_2d.scale
-var thrown: bool = false
 var fireballtexture: Texture2D = preload("res://assets/sprites/fireball.png")
 const my_balls:PackedScene = preload("res://basketball.tscn")
 
@@ -55,19 +54,19 @@ func _physics_process(delta: float) -> void:
 	elif position.y > (bounds.end - half_size).y:
 		position.y = (bounds.end - half_size).y
 		velocity = velocity.bounce(Vector2.UP)
-		bounced=true
+		bounced=true	
 
 	if bounced:
 		var max_angle := PI/3
 		velocity = velocity.rotated(randf_range(-max_angle, max_angle))
-	if !thrown:
+	if thrown<max_thrown:
 		var posDif = get_parent().get_node("player").position - position
 		if (posDif).length() < 1000:
 			var ball = my_balls.instantiate()
 			ball.setup(ball_var)
 			get_tree().current_scene.add_child(ball)
 			ball._throw(randf_range(0.1, 0.5), posDif.angle())
-			thrown = true
+			thrown += 1
 
 	
 	

@@ -22,14 +22,15 @@ func _physics_process(delta: float) -> void:
 		var obj = collision.get_collider()
 		if "health" in obj:
 			obj.health-=1
-			ball_var.ball_owner.thrown = false
+			if(ball_var.ball_owner != null):
+				ball_var.ball_owner.thrown -= 1
 			queue_free()
 		velocity=(velocity*ball_var.bounciness).bounce(collision.get_normal())
 		bounce_var+=1
 	rotation+=PI/1000*velocity.length()
 	if (bounce_var> ball_var.max_bounce || position.y > 300):
 		if(ball_var.ball_owner != null):
-			ball_var.ball_owner.thrown = false
+			ball_var.ball_owner.thrown -= 1
 		free()
 	
 	

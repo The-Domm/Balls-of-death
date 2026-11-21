@@ -22,7 +22,7 @@ const JUMP_VELOCITY = -1680.0
 
 var pressed = false
 const basket_balls:PackedScene = preload("res://basketball.tscn")
-var basketball_texture: Texture2D = preload("res://assets/sprites/basketBall.png")
+const basketball_texture: Texture2D = preload("res://assets/sprites/basketBall.png")
 @export var health:int=1
 @onready var kez: AnimatedSprite2D = $Kez
 @onready var kezhitbox: CollisionShape2D = $Kezhitbox
@@ -50,7 +50,7 @@ func _physics_process(delta: float) -> void:
 		if Input.is_mouse_button_pressed(1):
 			if !pressed:
 				pressed = true
-				startPos = get_local_mouse_position()
+				startPos = get_viewport().get_mouse_position()
 			var force = calcForce()
 			if force.angle < 3*PI/2 and force.angle > PI/2:
 				dir = -1
@@ -103,8 +103,7 @@ func _physics_process(delta: float) -> void:
 
 
 func calcForce():
-	var relPos :Vector2 = get_local_mouse_position() - startPos
-	print(get_local_mouse_position())
+	var relPos :Vector2 = get_viewport().get_mouse_position() - startPos
 	var size = get_viewport_rect().size 
 	var relSize = 1920/size.x
 	var force = relSize * relPos.length()
@@ -126,7 +125,7 @@ func show_trow(angle, force, pos: Vector2):
 	delete_particles()
 
 	var nextPos = pos
-	var vel : Vector2=Vector2(throw_force*force, 0).rotated(angle)
+	var vel : Vector2=Vector2(ball_var.max_force*force, 0).rotated(angle)
 	for i in range(1,10):
 		var particles = PARTICLE.instantiate()
 		nextPos.y=pos.y+vel.y*i*0.1+0.5*get_gravity().y*i*i*0.01

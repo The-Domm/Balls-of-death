@@ -1,4 +1,4 @@
-extends CharacterBody2D
+extends BallBearer
 class_name Enemy
 
 const SPEED = 100
@@ -6,14 +6,17 @@ const SPEED = 100
 
 @export var boundary_width := 500.0
 @export var boundary_height := 300.0
-
+var bounds := Rect2(position,Vector2(500,300))
+var half_size := Vector2()
 var thrown: bool = false
-
+var fireballtexture: Texture2D = preload("res://assets/sprites/fireball.png")
 const my_balls:PackedScene = preload("res://basketball.tscn")
 
 var boundary_center: Vector2
 
 var direction = Vector2.RIGHT.rotated(randi_range(1,4)*randf_range(PI/3, 2*PI/3)).normalized()
+@onready var capsule := $CollisionShape2D.shape as CapsuleShape2D
+@onready var halfsize: Vector2 = Vector2(capsule.radius, capsule.height*0.5)*$CollisionShape2D.scale
 
 @onready var ray_cast_right: RayCast2D = $RayCastRight
 @onready var ray_cast_left: RayCast2D = $RayCastLeft
@@ -23,6 +26,7 @@ var direction = Vector2.RIGHT.rotated(randi_range(1,4)*randf_range(PI/3, 2*PI/3)
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 
 func _ready() -> void:
+	ball_var.ball_sprite=fireballtexture
 	boundary_center = global_position
 	if(health==3):
 		$AnimatedSprite2D.scale*=3
@@ -75,7 +79,7 @@ func _physics_process(delta: float) -> void:
 		var posDif = get_parent().get_node("player").position - position
 		if (posDif).length() < 1000:
 			var ball = my_balls.instantiate()
-			ball.ball_owner=self
+			ball.setup(ball_var)
 			get_tree().current_scene.add_child(ball)
 			ball._throw(randf_range(0.1, 0.5), posDif.angle())
 			thrown = true

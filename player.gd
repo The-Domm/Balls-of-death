@@ -1,26 +1,32 @@
-extends CharacterBody2D
+extends BallBearer
 const SPRITE_HEIGHT = 294
 const SPEED = 1000
 const JUMP_VELOCITY = -1680.0
+
+
+
+@onready var jatekos: AnimatedSprite2D = $Jatekos
+
 @export var jump_height_ratio: float = 2.0
-@export var time_to_apex: float = 0.7
+@export var time_to_apex: float = 0.75
 @export var fall_multiplier: float = 2.2
 @export var jump_cut_multiplier: float = 0.5
 
-@onready var jatekos: AnimatedSprite2D = $Jatekos
+
 
 @onready var player_height: float = SPRITE_HEIGHT * abs(jatekos.scale.y)
 @onready var jump_height: float = player_height * jump_height_ratio
 @onready var gravity_f: float = (2.0 * jump_height) / (time_to_apex * time_to_apex)
 @onready var jump_velocity: float = -(2.0 * jump_height) / time_to_apex
+
+
 var pressed = false
 const basket_balls:PackedScene = preload("res://basketball.tscn")
+const basketball_texture: Texture2D = preload("res://assets/sprites/basketBall.png")
 @export var health:int=1
-
 @onready var kez: AnimatedSprite2D = $Kez
 @onready var kezhitbox: CollisionShape2D = $Kezhitbox
 @onready var feny: PointLight2D = $Feny
-var throw_force:int
 var startPos = 0
 var thrown: bool = false
 var dimming=0
@@ -29,8 +35,7 @@ var no_boss:bool = true
 var start_time := -1
 
 func _ready() -> void:
-	
-	throw_force= BasketBall.THROWABLE
+	ball_var.ball_sprite=basketball_texture
 	#bossEvent()
 	position=Vector2.ZERO
 	ProjectSettings.set_setting("physics/2d/default_gravity", gravity_f)
@@ -45,7 +50,7 @@ func _physics_process(delta: float) -> void:
 		if Input.is_mouse_button_pressed(1):
 			if !pressed:
 				pressed = true
-				startPos = get_local_mouse_position()
+				startPos = get_viewport().get_mouse_position()
 			var force = calcForce()
 			if force.angle < 3*PI/2 and force.angle > PI/2:
 				dir = -1
@@ -57,7 +62,7 @@ func _physics_process(delta: float) -> void:
 			delete_particles()
 			var force = calcForce()
 			var ball = basket_balls.instantiate()
-			ball.ball_owner=self
+			ball.setup(ball_var)
 			get_tree().current_scene.add_child(ball)
 			thrown = true
 			ball._throw(force.force, force.angle,Vector2(dir*36, -50))
@@ -98,8 +103,7 @@ func _physics_process(delta: float) -> void:
 
 
 func calcForce():
-	var relPos :Vector2 = get_local_mouse_position() - startPos
-	print(get_local_mouse_position())
+	var relPos :Vector2 = get_viewport().get_mouse_position() - startPos
 	var size = get_viewport_rect().size 
 	var relSize = 1920/size.x
 	var force = relSize * relPos.length()
@@ -121,7 +125,7 @@ func show_trow(angle, force, pos: Vector2):
 	delete_particles()
 
 	var nextPos = pos
-	var vel : Vector2=Vector2(throw_force*force, 0).rotated(angle)
+	var vel : Vector2=Vector2(ball_var.max_force*force, 0).rotated(angle)
 	for i in range(1,10):
 		var particles = PARTICLE.instantiate()
 		nextPos.y=pos.y+vel.y*i*0.1+0.5*get_gravity().y*i*i*0.01

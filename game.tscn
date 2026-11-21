@@ -51,8 +51,9 @@ script = ExtResource("1_7jktm")
 [node name="player" parent="." unique_id=1607358254 instance=ExtResource("2_feb5d")]
 position = Vector2(4, -7000)
 
-[node name="Camera2D" type="Camera2D" parent="player" unique_id=911228454]
-zoom = Vector2(0.38, 0.38)
+[node name="Camera2D" type="Camera2D" parent="player" unique_id=59254619]
+zoom = Vector2(0.3, 0.3)
+process_callback = 0
 
 [node name="TileMap" type="TileMap" parent="." unique_id=1896411683]
 position = Vector2(-35, -361)
@@ -69,7 +70,7 @@ parameters/looping = true
 position = Vector2(2959, -1666)
 
 [node name="enemy2" parent="." unique_id=1202946171 instance=ExtResource("6_ryrav")]
-position = Vector2(-1750, -577)
+position = Vector2(-1332, -356)
 
 [node name="enemy3" parent="." unique_id=1446512001 instance=ExtResource("6_ryrav")]
 position = Vector2(-719, -3969)
@@ -91,6 +92,7 @@ position = Vector2(271, -24625)
 health = 3
 
 [node name="Background" parent="." unique_id=113815056 instance=ExtResource("7_eow3j")]
+position = Vector2(10, 17)
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=862705318]
 

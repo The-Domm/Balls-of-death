@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://bs8ah3qvyf3ek"]
+
+[ext_resource type="AudioStream" uid="uid://g7ajnumhbg7b" path="res://assets/sounds/Cursed Night.mp3" id="1_3h6ak"]
+
+[node name="Music" type="AudioStreamPlayer" unique_id=827357403]
+stream = ExtResource("1_3h6ak")
+autoplay = true
+bus = &"Music"
+parameters/looping = true

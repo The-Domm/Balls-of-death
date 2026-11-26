@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://b0gophw0kjpyh"]
+
+[ext_resource type="Script" uid="uid://c7ilbli2tpnnh" path="res://updgrade.gd" id="1_k020y"]
+
+[node name="upgrade" type="CanvasLayer" unique_id=428226381]
+process_mode = 3
+script = ExtResource("1_k020y")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=457449828]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 1
+color = Color(0.33213586, 0.3321359, 0.3321359, 1)
+
+[node name="Control" type="Control" parent="." unique_id=1394008461]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Control" unique_id=2029103313]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/ScrollContainer" unique_id=2009983891]
+z_index = 1
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 0

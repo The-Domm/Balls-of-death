@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://bip812cpqv43b"]
+
+[ext_resource type="Script" uid="uid://dcka0fmhhfk6v" path="res://upgrade_button.gd" id="1_feo8w"]
+
+[node name="Button" type="Button" unique_id=402514776]
+custom_minimum_size = Vector2(200, 50)
+offset_right = 8.0
+offset_bottom = 8.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_feo8w")

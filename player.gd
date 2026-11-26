@@ -47,6 +47,7 @@ func _physics_process(delta: float) -> void:
 	if thrown<max_thrown:
 		var dir:float
 		if Input.is_mouse_button_pressed(1):
+			max_thrown=$upgrade.upgrades["more_balls"].get_effect()
 			if !pressed:
 				pressed = true
 				startPos = get_viewport().get_mouse_position()

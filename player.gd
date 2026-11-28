@@ -48,6 +48,8 @@ func _physics_process(delta: float) -> void:
 		var dir:float
 		if Input.is_mouse_button_pressed(1):
 			max_thrown=$upgrade.upgrades["more_balls"].get_effect()
+			ball_var.max_healt=$upgrade.upgrades["bouncier_balls"].get_effect()
+			ball_var.max_force=$upgrade.upgrades["faster_balls"].get_effect()
 			if !pressed:
 				pressed = true
 				startPos = get_viewport().get_mouse_position()
@@ -144,7 +146,7 @@ func _process(delta: float) -> void:
 	jatekos.offset=Vector2i(0,0)
 	if not is_on_floor():
 		jatekos.play("jump")
-		if thrown:
+		if thrown>=max_thrown:
 			kez.play("empty")
 		else:
 			kez.play("jump")

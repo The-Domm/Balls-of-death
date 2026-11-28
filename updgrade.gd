@@ -3,7 +3,8 @@ extends CanvasLayer
 @onready var parent = get_parent()
 var upgrades := {
 	&"more_balls": UpgradeData.new("More Balls",3,1,func(initial_cost:int, level:int): return initial_cost*level),
-	&"faster_balls": UpgradeData.new("Faster Balls",3,1,func(initial_cost:int, level:int): return initial_cost*level)
+	&"faster_balls": UpgradeData.new("Faster Balls",3,1,func(initial_cost:int, level:int): return initial_cost*level,func(level:int): return 2000*pow(1.2,level)),
+	&"bouncier_balls": UpgradeData.new("Bouncier Balls",3,1,func(initial_cost:int, level:int): return initial_cost*level)
 }
 const UPGRADE_BUTTON=preload("res://upgrade_button.tscn")
 var points:int =99
